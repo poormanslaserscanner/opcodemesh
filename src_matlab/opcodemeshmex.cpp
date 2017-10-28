@@ -68,6 +68,22 @@ void convertfv(mxArray *fm, mxArray *vm, Mesh *fv) {
   fv->cVertices = vc;
 }
 
+template<> 
+inline void destroyObject<Model>(const mxArray *in)
+{
+    class_handle<Model> *opcode = convertMat2HandlePtr<Model>(in);
+    const MeshInterface *mIMesh = opcode->ptr()->GetMeshInterface();
+    delete opcode;
+    const IceMaths::IndexedTriangle* trisp = mIMesh->GetTris();
+    const IceMaths::Point* vtp =  mIMesh->GetVerts();
+    delete mIMesh;
+    delete[] trisp;
+    delete[] vtp;
+    	
+    mexUnlock();
+}
+
+
 void mexFunction( int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 	
   if (nrhs < 1 || !(mxIsChar(prhs[0]))) {
