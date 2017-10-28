@@ -81,14 +81,14 @@
 //  #endif
     #define ICECORE_API
 
-	// Don't override new/delete
+	// Don't OVERRIDE new/delete
 //	#define DEFAULT_NEWDELETE
 	#define DONT_TRACK_MEMORY_LEAKS
 
 	#define FUNCTION				extern "C"
 
 	// Cosmetic stuff [mainly useful with multiple inheritance]
-	#define	override(base_class)	virtual
+	#define	OVERRIDE(base_class)	virtual
 
 	// Our own inline keyword, so that:
 	// - we can switch to __forceinline to check it's really better or not
